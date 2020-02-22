@@ -1,0 +1,30 @@
+/* @keyframes sidebaritem {
+    0% {}
+    100% {padding-left: 33%;
+    background-color: whitesmoke;}
+} */
+.link {
+  text-decoration: none;
+  color: black;
+}
+.sidebar_item {
+  margin-bottom: 20px;
+  height: 30px;
+  padding-left: 10px;
+  background-color: rgb(129, 255, 177);
+  border: 2px solid rgb(55, 232, 255);
+  border-radius: 20px;
+  font-size: 16pt;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar_item:hover {
+  /* background-color: rgb(55, 232, 255);
+  padding-left: 20px; */
+  animation: sidebaritem 0.5s ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  transform: translateX(10px);
+  background-color: rgb(55, 232, 255);
+}
+
