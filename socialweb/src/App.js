@@ -7,14 +7,14 @@ import Sidebar from "./Sidebar/sidebar";
 import Content from "./Content/content";
 import UserPic from "./userPic/userPic";
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
         <UserPic />
         <Sidebar />
-        <Content />
+        <Content profile={props.state.profile} dialogs={props.state.dialogs} />
         <Footer />
       </div>
     </BrowserRouter>

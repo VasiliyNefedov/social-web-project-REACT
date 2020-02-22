@@ -1,37 +1,42 @@
 import React from "react";
-import c from "./profileBlog.module.css";
-import pic from "../../../img/avatar.jpg";
+import style from "./profileBlog.module.css";
+import pic from "./../../../img/avatar.jpg";
 
-let profileBlogItem = [
-  { id: 1, message: "Hi all!", likesCount: 8 },
-  { id: 2, message: "Glad to see you!", likesCount: 4 }
-];
-
-let profileBlogItemArray = profileBlogItem
-  .map(el => {
-    return (
-      <div className={c.profileBlogPost}>
-        <img src={pic} alt="avatar" className={c.pic}></img>
-        {el.message}
-        <div>
-          <span>like: {el.likesCount}</span>
+function ProfileBlog(props) {
+  let profileBlogItemsArray = props.profileBlogItems
+    .map(el => {
+      return (
+        <div className={style.profileBlogPost}>
+          <img src={pic} alt="avatar" className={style.pic}></img>
+          {el.message}
+          <div>
+            <span>like: {el.likesCount}</span>
+          </div>
         </div>
-      </div>
-    );
-  })
-  .reverse();
+      );
+    })
+    .reverse();
 
-function ProfileBlog() {
+  let newPostText = React.createRef();
+
+  let AddProfileBlogPost = () => {
+    alert(newPostText.current.value);
+    newPostText.current.value = "";
+  };
+
   return (
     <div className="profileBlog">
       <div>
         <textarea
-          className={c.textarea}
+          ref={newPostText}
+          className={style.textarea}
           placeholder="Write your post here..."
         ></textarea>
-        <button>Send post</button>
+        <button onClick={AddProfileBlogPost} className={style.button}>
+          Send post
+        </button>
       </div>
-      {profileBlogItemArray}
+      {profileBlogItemsArray}
     </div>
   );
 }

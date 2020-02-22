@@ -1,18 +1,21 @@
 import React from "react";
-import c from "./dialogsChat.module.css";
+import style from "./dialogsChat.module.css";
 
-let dialogsChatMessages = [
-  { id: 1, message: "Hi!" },
-  { id: 2, message: "How are you?" },
-  { id: 3, message: "Did you learn react.JS?" }
-];
+function DialogsChat(props) {
+  let dialogsChatMessagesArray = props.dialogsChatMessages.map(el => {
+    return <div className={style.message}>{el.message}</div>;
+  });
 
-let dialogsChatMessagesArray = dialogsChatMessages.map(el => {
-  return <div className={c.message}>{el.message}</div>;
-});
-
-function DialogsChat() {
-  return <div className={c.dialogsChat}>{dialogsChatMessagesArray}</div>;
+  return (
+    <div>
+      <div className={style.dialogsChat}>{dialogsChatMessagesArray}</div>
+      <textarea
+        placeholder="Write your message..."
+        className={style.textarea}
+      ></textarea>
+      <button className={style.button}>Send message</button>
+    </div>
+  );
 }
 
 export default DialogsChat;

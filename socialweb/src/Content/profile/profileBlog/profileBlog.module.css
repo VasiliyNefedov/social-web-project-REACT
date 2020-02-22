@@ -16,3 +16,17 @@
     border: 2px solid rgb(55, 232, 255);
     border-radius: 50%;
 }
+.button {
+    border: 2px solid rgb(55, 232, 255);
+    border-radius: 20px;
+    height: 30px;
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12pt;
+    background-color: rgb(129, 255, 177);
+    transition: all 0.5s ease-in-out;
+}
+.button:hover {
+    background-color: rgb(55, 232, 255);
+}
