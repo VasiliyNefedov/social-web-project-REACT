@@ -14,7 +14,14 @@ function App(props) {
         <Header />
         <UserPic />
         <Sidebar />
-        <Content profile={props.state.profile} dialogs={props.state.dialogs} />
+        <Content
+          profile={props.state.profile}
+          dialogs={props.state.dialogs}
+          SetProfileBlogItems={props.SetProfileBlogItems}
+          UpdateCurrentPostText={props.UpdateCurrentPostText}
+          SetDialogsChatMessages={props.SetDialogsChatMessages}
+          UpdateCurrentMessageText={props.UpdateCurrentMessageText}
+        />
         <Footer />
       </div>
     </BrowserRouter>

@@ -3,7 +3,7 @@ import style from "./profileBlog.module.css";
 import pic from "./../../../img/avatar.jpg";
 
 function ProfileBlog(props) {
-  let profileBlogItemsArray = props.profileBlogItems
+  let profileBlogItemsArray = props.profile.profileBlogItems
     .map(el => {
       return (
         <div className={style.profileBlogPost}>
@@ -20,14 +20,19 @@ function ProfileBlog(props) {
   let newPostText = React.createRef();
 
   let AddProfileBlogPost = () => {
-    alert(newPostText.current.value);
-    newPostText.current.value = "";
+    props.SetProfileBlogItems();
+  };
+
+  let onPostChange = () => {
+    props.UpdateCurrentPostText(newPostText.current.value);
   };
 
   return (
     <div className="profileBlog">
       <div>
         <textarea
+          value={props.profile.currentPostText}
+          onChange={onPostChange}
           ref={newPostText}
           className={style.textarea}
           placeholder="Write your post here..."

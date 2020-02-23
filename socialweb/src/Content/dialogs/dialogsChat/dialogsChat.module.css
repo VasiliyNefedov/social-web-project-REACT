@@ -12,7 +12,7 @@
     margin: 0;
     padding: 10px;
     width: calc(100% - 23px);
-    height: 100px;
+    height: 50px;
     border: 2px solid rgb(55, 232, 255);
     border-radius: 20px;
 }

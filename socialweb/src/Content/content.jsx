@@ -9,15 +9,22 @@ function Content(props) {
       <Route
         path="/profile"
         render={() => (
-          <Profile profileBlogItems={props.profile.profileBlogItems} />
+          <Profile
+            profile={props.profile}
+            SetProfileBlogItems={props.SetProfileBlogItems}
+            UpdateCurrentPostText={props.UpdateCurrentPostText}
+          />
         )}
       />
       <Route
         path="/dialogs"
         render={() => (
           <Dialogs
-            dialogsListItems={props.dialogs.dialogsListItems}
-            dialogsChatMessages={props.dialogs.dialogsChatMessages}
+          dialogs={props.dialogs}
+            // dialogsListItems={props.dialogs.dialogsListItems}
+            // dialogsChatMessages={props.dialogs.dialogsChatMessages}
+            SetDialogsChatMessages={props.SetDialogsChatMessages}
+            UpdateCurrentMessageText={props.UpdateCurrentMessageText}
           />
         )}
       />
