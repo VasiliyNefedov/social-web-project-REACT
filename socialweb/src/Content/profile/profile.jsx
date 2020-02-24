@@ -6,11 +6,7 @@ function Profile(props) {
   return (
     <div className="profile">
       <ProfileInfo />
-      <ProfileBlog
-        profile={props.profile}
-        SetProfileBlogItems={props.SetProfileBlogItems}
-        UpdateCurrentPostText={props.UpdateCurrentPostText}
-      />
+      <ProfileBlog profile={props.profile} dispatch={props.dispatch} />
     </div>
   );
 }

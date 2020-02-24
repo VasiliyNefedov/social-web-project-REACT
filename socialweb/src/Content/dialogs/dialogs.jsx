@@ -10,12 +10,7 @@ function Dialogs(props) {
         <DialogsList dialogsListItems={props.dialogs.dialogsListItems} />
       </div>
       <div className={c.dialogsChat}>
-        <DialogsChat
-          dialogsChatMessages={props.dialogs.dialogsChatMessages}
-          currentMessageText={props.dialogs.currentMessageText}
-          SetDialogsChatMessages={props.SetDialogsChatMessages}
-          UpdateCurrentMessageText={props.UpdateCurrentMessageText}
-        />
+        <DialogsChat dispatch={props.dispatch} dialogs={props.dialogs} />
       </div>
     </div>
   );

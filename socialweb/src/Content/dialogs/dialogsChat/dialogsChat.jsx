@@ -1,26 +1,30 @@
 import React from "react";
 import style from "./dialogsChat.module.css";
+import {
+  SetDialogsChatMessagesAC,
+  UpdateCurrentMessageTextAC
+} from "../../../redux/dialogsReducer";
 
 function DialogsChat(props) {
-  let dialogsChatMessagesArray = props.dialogsChatMessages.map(el => {
+  let dialogsChatMessagesArray = props.dialogs.dialogsChatMessages.map(el => {
     return <div className={style.message}>{el.message}</div>;
   });
 
   let newMessageText = React.createRef();
 
   let addNewMessage = () => {
-    props.SetDialogsChatMessages();
+    props.dispatch(SetDialogsChatMessagesAC());
   };
 
   let onMessageChange = () => {
-    props.UpdateCurrentMessageText(newMessageText.current.value);
+    props.dispatch(UpdateCurrentMessageTextAC(newMessageText.current.value));
   };
 
   return (
     <div>
       <div className={style.dialogsChat}>{dialogsChatMessagesArray}</div>
       <textarea
-        value={props.currentMessageText}
+        value={props.dialogs.currentMessageText}
         onChange={onMessageChange}
         ref={newMessageText}
         placeholder="Write your message..."
@@ -34,3 +38,5 @@ function DialogsChat(props) {
 }
 
 export default DialogsChat;
+
+

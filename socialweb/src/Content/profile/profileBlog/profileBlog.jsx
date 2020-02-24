@@ -1,6 +1,10 @@
 import React from "react";
-import style from "./profileBlog.module.css";
 import pic from "./../../../img/avatar.jpg";
+import style from "./profileBlog.module.css";
+import {
+  SetProfileBlogItemsAC,
+  UpdateCurrentPostTextAC
+} from "../../../redux/profileReducer";
 
 function ProfileBlog(props) {
   let profileBlogItemsArray = props.profile.profileBlogItems
@@ -20,11 +24,11 @@ function ProfileBlog(props) {
   let newPostText = React.createRef();
 
   let AddProfileBlogPost = () => {
-    props.SetProfileBlogItems();
+    props.dispatch(SetProfileBlogItemsAC());
   };
 
   let onPostChange = () => {
-    props.UpdateCurrentPostText(newPostText.current.value);
+    props.dispatch(UpdateCurrentPostTextAC(newPostText.current.value));
   };
 
   return (

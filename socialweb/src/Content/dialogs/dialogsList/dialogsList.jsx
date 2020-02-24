@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 function DialogsList(props) {
   let dialogsListItemsArray = props.dialogsListItems.map(el => {
     return (
-      <NavLink to={`/dialogs/${el.id}`}>
-        <div className={c.item}>{el.name}</div>
+      <NavLink className={c.item} to={`/dialogs/${el.id}`}>
+        <div className={c.name}>{el.name}</div>
       </NavLink>
     );
   });
