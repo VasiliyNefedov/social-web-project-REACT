@@ -11,18 +11,27 @@ let initialState = {
 
 const profileReducer = (stateReducer = initialState, action) => {
   switch (action.type) {
-    case SET_PROFILE_BLOG_ITEMS:
+    case SET_PROFILE_BLOG_ITEMS: {
       let newPost = {
         id: 5,
         message: stateReducer.currentPostText,
         likesCount: 0
       };
-      stateReducer.profileBlogItems.push(newPost);
-      stateReducer.currentPostText = "";
-      return stateReducer;
-    case UPDATE_CURRENT_POST_TEXT:
-      stateReducer.currentPostText = action.currentText;
-      return stateReducer;
+      let stateCopy = { ...stateReducer };
+      stateCopy.profileBlogItems = [...stateReducer.profileBlogItems];
+      if (stateReducer.currentPostText !== "") {
+        stateCopy.profileBlogItems.push(newPost);
+      } else {
+        return stateReducer;
+      }
+      stateCopy.currentPostText = "";
+      return stateCopy;
+    }
+    case UPDATE_CURRENT_POST_TEXT: {
+      let stateCopy = { ...stateReducer };
+      stateCopy.currentPostText = action.currentText;
+      return stateCopy;
+    }
     default:
       return stateReducer;
   }

@@ -1,33 +1,30 @@
-import React from "react";
 import {
   SetDialogsChatMessagesAC,
   UpdateCurrentMessageTextAC
 } from "../../../redux/dialogsReducer";
-import DialogsChat from "./dialogsChat";
-import StoreContext from "../../../StoreContext";
+import { connect } from "react-redux";
+import DialogsChat from './dialogsChat';
 
-const DialogsChatContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {store => {
-        let addNewMessage = () => {
-          store.dispatch(SetDialogsChatMessagesAC());
-        };
-
-        let onMessageChange = text => {
-          store.dispatch(UpdateCurrentMessageTextAC(text));
-        };
-        return (
-          <DialogsChat
-            UpdateCurrentMessageTextAC={onMessageChange}
-            SetDialogsChatMessagesAC={addNewMessage}
-            dialogsChatMessages={store.getState().dialogs.dialogsChatMessages}
-            currentMessageText={store.getState().dialogs.currentMessageText}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
+let mapStateToProps = state => {
+  return {
+    dialogsChatMessages: state.dialogs.dialogsChatMessages,
+    currentMessageText: state.dialogs.currentMessageText
+  };
 };
+let mapDispatchToProps = dispatch => {
+  return {
+    UpdateCurrentMessageTextAC: text => {
+      dispatch(UpdateCurrentMessageTextAC(text));
+    },
+    SetDialogsChatMessagesAC: () => {
+      dispatch(SetDialogsChatMessagesAC());
+    }
+  };
+};
+
+const DialogsChatContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DialogsChat);
 
 export default DialogsChatContainer;
