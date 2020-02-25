@@ -1,12 +1,12 @@
 import React from "react";
 import ProfileInfo from "./profileInfo/profileInfo";
-import ProfileBlog from "./profileBlog/profileBlog";
+import ProfileBlogContainer from "./profileBlog/profileBlogContainer";
 
 function Profile(props) {
   return (
     <div className="profile">
       <ProfileInfo />
-      <ProfileBlog profile={props.profile} dispatch={props.dispatch} />
+      <ProfileBlogContainer store={props.store} />
     </div>
   );
 }

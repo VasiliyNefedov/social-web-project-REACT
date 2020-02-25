@@ -1,13 +1,10 @@
 import React from "react";
 import pic from "./../../../img/avatar.jpg";
 import style from "./profileBlog.module.css";
-import {
-  SetProfileBlogItemsAC,
-  UpdateCurrentPostTextAC
-} from "../../../redux/profileReducer";
 
 function ProfileBlog(props) {
-  let profileBlogItemsArray = props.profile.profileBlogItems
+
+  let profileBlogItemsArray = props.profileBlogItems
     .map(el => {
       return (
         <div className={style.profileBlogPost}>
@@ -20,22 +17,22 @@ function ProfileBlog(props) {
       );
     })
     .reverse();
-
+  
   let newPostText = React.createRef();
 
   let AddProfileBlogPost = () => {
-    props.dispatch(SetProfileBlogItemsAC());
+    props.SetProfileBlogItemsAC();
   };
 
   let onPostChange = () => {
-    props.dispatch(UpdateCurrentPostTextAC(newPostText.current.value));
+    props.UpdateCurrentPostTextAC(newPostText.current.value);
   };
 
   return (
     <div className="profileBlog">
       <div>
         <textarea
-          value={props.profile.currentPostText}
+          value={props.currentPostText}
           onChange={onPostChange}
           ref={newPostText}
           className={style.textarea}

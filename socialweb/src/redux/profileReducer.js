@@ -1,7 +1,15 @@
 const SET_PROFILE_BLOG_ITEMS = "SET-PROFILE-BLOG-ITEMS";
 const UPDATE_CURRENT_POST_TEXT = "UPDATE-CURRENT-POST-TEXT";
 
-const profileReducer = (stateReducer, action) => {
+let initialState = {
+  profileBlogItems: [
+    { id: 1, message: "Hi all!", likesCount: 8 },
+    { id: 2, message: "Glad to see you!", likesCount: 4 }
+  ],
+  currentPostText: ""
+};
+
+const profileReducer = (stateReducer = initialState, action) => {
   switch (action.type) {
     case SET_PROFILE_BLOG_ITEMS:
       let newPost = {

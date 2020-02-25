@@ -1,16 +1,16 @@
 import React from "react";
-import DialogsList from "./dialogsList/dialogsList";
-import DialogsChat from "./dialogsChat/dialogsChat";
 import c from "./dialogs.module.css";
+import DialogsChatContainer from "./dialogsChat/dialogsChatContainer";
+import DialogsListContainer from "./dialogsList/dialogsListContainer";
 
 function Dialogs(props) {
   return (
     <div className={c.dialogs}>
       <div className={c.dialogsList}>
-        <DialogsList dialogsListItems={props.dialogs.dialogsListItems} />
+        <DialogsListContainer />
       </div>
       <div className={c.dialogsChat}>
-        <DialogsChat dispatch={props.dispatch} dialogs={props.dialogs} />
+        <DialogsChatContainer />
       </div>
     </div>
   );
