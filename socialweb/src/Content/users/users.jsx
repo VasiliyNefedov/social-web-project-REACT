@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./users.module.css";
 
 const Users = props => {
   if (props.userList.length === 0) {
@@ -62,12 +63,11 @@ const Users = props => {
 
   return (
     <div className="users">
-      Users will be here
       {props.userList.map(el => (
-        <div key={el.id}>
-          <span>
+        <div key={el.id} className={style.userItem}>
+          <div>
             <div>
-              <img src={el.avatar} alt=" :^( " />
+              <img src={el.avatar} alt=" :^( " className={style.pic} />
             </div>
             <div>
               {el.followed ? (
@@ -75,6 +75,7 @@ const Users = props => {
                   onClick={() => {
                     props.unfollow(el.id);
                   }}
+                  className={`${style.button} ${style.button_unfollow}`}
                 >
                   Unfollow
                 </button>
@@ -83,22 +84,21 @@ const Users = props => {
                   onClick={() => {
                     props.follow(el.id);
                   }}
+                  className={`${style.button} ${style.button_follow}`}
                 >
                   Follow
                 </button>
               )}
             </div>
-          </span>
-          <span>
-            <span>
-              <div>{el.fullName}</div>
-              <div>{el.status}</div>
-            </span>
-            <span>
+          </div>
+          <div className={style.userInfo}>
+            <div className={style.userName}>{el.fullName}</div>
+            <div className={style.userStatus}>{el.status}</div>
+            <div className={style.userLocation}>
               <div>{el.location.country}</div>
               <div>{el.location.city}</div>
-            </span>
-          </span>
+            </div>
+          </div>
         </div>
       ))}
     </div>
