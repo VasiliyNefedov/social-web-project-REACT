@@ -2,7 +2,7 @@ import React from "react";
 import pic from "./../../../img/avatar.jpg";
 import style from "./profileBlog.module.css";
 
-function ProfileBlog(props) {
+const ProfileBlog = (props) => {
 
   let profileBlogItemsArray = props.profileBlogItems
     .map(el => {

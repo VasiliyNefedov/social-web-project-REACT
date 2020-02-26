@@ -25,8 +25,10 @@ const dialogsReducer = (stateReducer = initialState, action) => {
         id: 4,
         message: stateReducer.currentMessageText
       };
-      let stateCopy = { ...stateReducer };
-      stateCopy.dialogsChatMessages = [...stateReducer.dialogsChatMessages];
+      let stateCopy = {
+        ...stateReducer,
+        dialogsChatMessages: [...stateReducer.dialogsChatMessages]
+      };
 
       if (stateReducer.currentMessageText !== "") {
         stateCopy.dialogsChatMessages.push(newMessage);

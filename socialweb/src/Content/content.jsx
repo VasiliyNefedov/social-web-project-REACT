@@ -2,6 +2,7 @@ import React from "react";
 import Profile from "./profile/profile";
 import Dialogs from "./dialogs/dialogs";
 import { Route } from "react-router-dom";
+import UsersContainer from "./users/usersContainer";
 
 function Content(props) {
   return (
@@ -9,13 +10,19 @@ function Content(props) {
       <Route
         path="/profile"
         render={() => (
-          <Profile store={props.store} />
+          <Profile />
         )}
       />
       <Route
         path="/dialogs"
         render={() => (
-          <Dialogs store={props.store} />
+          <Dialogs />
+        )}
+      />
+       <Route
+        path="/users"
+        render={() => (
+          <UsersContainer />
         )}
       />
     </div>

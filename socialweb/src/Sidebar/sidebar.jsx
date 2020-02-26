@@ -8,6 +8,7 @@ function Sidebar() {
     <NavLink to='/dialogs' className={c.link}><div className={c.sidebar_item}><div>Dialogs</div></div></NavLink>
     <NavLink to='/music' className={c.link}><div className={c.sidebar_item}><div>Music</div></div></NavLink>
     <NavLink to='/feed' className={c.link}><div className={c.sidebar_item}><div>Feed</div></div></NavLink>
+    <NavLink to='/users' className={c.link}><div className={c.sidebar_item}><div>Users</div></div></NavLink>
   </div>;
 }
 

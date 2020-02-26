@@ -17,8 +17,10 @@ const profileReducer = (stateReducer = initialState, action) => {
         message: stateReducer.currentPostText,
         likesCount: 0
       };
-      let stateCopy = { ...stateReducer };
-      stateCopy.profileBlogItems = [...stateReducer.profileBlogItems];
+      let stateCopy = {
+        ...stateReducer,
+        profileBlogItems: [...stateReducer.profileBlogItems]
+      };
       if (stateReducer.currentPostText !== "") {
         stateCopy.profileBlogItems.push(newPost);
       } else {
