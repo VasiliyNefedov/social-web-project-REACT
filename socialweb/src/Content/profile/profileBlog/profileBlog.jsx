@@ -1,5 +1,5 @@
 import React from "react";
-import pic from "./../../../img/avatar.jpg";
+import pic from "./../../../assets/img/avatar.jpg";
 import style from "./profileBlog.module.css";
 
 const ProfileBlog = (props) => {

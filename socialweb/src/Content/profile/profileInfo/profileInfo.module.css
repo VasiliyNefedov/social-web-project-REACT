@@ -1,0 +1,25 @@
+.profileInfo {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.userPic {
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgb(55, 232, 255);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.description {
+    height: 300px;
+    border: 2px solid rgb(55, 232, 255);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-left: 10px;
+    flex-grow: 1;
+    padding: 0 10px;
+}
+.fullName {
+    font-size: 24pt;
+}

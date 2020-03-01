@@ -2,10 +2,10 @@ import React from "react";
 import ProfileInfo from "./profileInfo/profileInfo";
 import ProfileBlogContainer from "./profileBlog/profileBlogContainer";
 
-function Profile(props) {
+const Profile = (props) => {
   return (
-    <div className="profile">
-      <ProfileInfo />
+    <div>
+      <ProfileInfo displayProfile={props.displayProfile} />
       <ProfileBlogContainer store={props.store} />
     </div>
   );

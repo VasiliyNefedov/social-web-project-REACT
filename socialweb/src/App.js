@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
-import Header from "./Header/header";
 import Footer from "./Footer/footer";
 import Sidebar from "./Sidebar/sidebar";
 import Content from "./Content/content";
 import UserPic from "./userPic/userPic";
+import HeaderContainer from "./Header/headerContainer";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <UserPic />
       <Sidebar />
       <Content />

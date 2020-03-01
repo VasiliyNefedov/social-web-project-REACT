@@ -7,6 +7,7 @@
 }
 
 .userInfo {
+  overflow: hidden;
   border: 2px solid rgb(55, 232, 255);
   border-radius: 20px;
   margin: 0;
@@ -27,7 +28,6 @@
 }
 .userStatus {
   grid-area: status;
-
 }
 .userLocation {
   grid-area: location;
@@ -59,4 +59,12 @@
 }
 .button:hover {
   background-color: rgb(55, 232, 255);
+}
+.selectedPage {
+  font-size: larger;
+  font-weight: bolder;
+}
+.pages {
+  text-align: center;
+  margin: 0 auto;
 }

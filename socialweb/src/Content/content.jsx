@@ -1,16 +1,16 @@
 import React from "react";
-import Profile from "./profile/profile";
 import Dialogs from "./dialogs/dialogs";
 import { Route } from "react-router-dom";
 import UsersContainer from "./users/usersContainer";
+import ProfileContainer from "./profile/profileContainer";
 
 function Content(props) {
   return (
     <div className="content">
       <Route
-        path="/profile"
+        path="/profile/:userId?"
         render={() => (
-          <Profile />
+          <ProfileContainer />
         )}
       />
       <Route
