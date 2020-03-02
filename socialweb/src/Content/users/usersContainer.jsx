@@ -6,38 +6,31 @@ import {
   setUsers,
   setCurrentPage,
   setTotalCount,
-  setToogleIsFetching
+  setToogleIsFetching,
+  setToogleFollowingInProgress
 } from "../../redux/usersReducer";
 import Users from "./users";
-import Axios from "axios";
 import Preloader from "../../common/preloader/preloader";
+import { getUsers } from "../../API/API";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.setToogleIsFetching(true);
-    Axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-      {
-        withCredentials: true
-      }
-    ).then(response => {
+
+    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
       this.props.setToogleIsFetching(false);
-      this.props.setUsers(response.data.items);
-      this.props.setTotalCount(response.data.totalCount);
+      this.props.setUsers(data.items);
+      this.props.setTotalCount(data.totalCount);
     });
   }
 
   onPageChanged = page => {
     this.props.setToogleIsFetching(true);
     this.props.setCurrentPage(page);
-    Axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
-      {
-        withCredentials: true
-      }
-    ).then(response => {
+
+    getUsers(page, this.props.pageSize).then(data => {
       this.props.setToogleIsFetching(false);
-      this.props.setUsers(response.data.items);
+      this.props.setUsers(data.items);
     });
   };
 
@@ -69,6 +62,8 @@ class UsersContainer extends React.Component {
             unfollow={this.props.unfollow}
             follow={this.props.follow}
             isFetching={this.props.isFetching}
+            followingInProgress={this.props.followingInProgress}
+            setToogleFollowingInProgress={this.props.setToogleFollowingInProgress}
           />
         )}
       </>
@@ -82,7 +77,8 @@ let mapStateToProps = state => {
     pageSize: state.users.pageSize,
     totalCount: state.users.totalCount,
     currentPage: state.users.currentPage,
-    isFetching: state.users.isFetching
+    isFetching: state.users.isFetching,
+    followingInProgress: state.users.followingInProgress
   };
 };
 
@@ -92,5 +88,6 @@ export default connect(mapStateToProps, {
   setUsers,
   setCurrentPage,
   setTotalCount,
-  setToogleIsFetching
+  setToogleIsFetching,
+  setToogleFollowingInProgress
 })(UsersContainer);

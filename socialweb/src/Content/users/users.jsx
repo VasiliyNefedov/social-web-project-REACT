@@ -2,7 +2,7 @@ import React from "react";
 import style from "./users.module.css";
 import defaultPic from "./../../assets/img/defaultPic.png";
 import { NavLink } from "react-router-dom";
-import Axios from "axios";
+import { setUnfollow, setFollow } from "../../API/API";
 
 const Users = props => {
   return (
@@ -38,19 +38,14 @@ const Users = props => {
             <div>
               {el.followed ? (
                 <button
+                  disabled={props.followingInProgress}
                   onClick={() => {
-                    Axios.delete(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-                      {
-                        withCredentials: true,
-                        headers: {
-                          "API-KEY": "8db38b56-3a25-4b9f-9cb9-37de5d004d04"
-                        }
-                      }
-                    ).then(response => {
-                      if (response.data.resultCode === 0) {
+                    props.setToogleFollowingInProgress(true);
+                    setUnfollow(el.id).then(data => {
+                      if (data.resultCode === 0) {
                         props.unfollow(el.id);
                       }
+                      props.setToogleFollowingInProgress(false);
                     });
                   }}
                   className={`${style.button} ${style.button_unfollow}`}
@@ -59,20 +54,14 @@ const Users = props => {
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress}
                   onClick={() => {
-                    Axios.post(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
-                      null,
-                      {
-                        withCredentials: true,
-                        headers: {
-                          "API-KEY": "8db38b56-3a25-4b9f-9cb9-37de5d004d04"
-                        }
-                      }
-                    ).then(response => {
-                      if (response.data.resultCode === 0) {
+                    props.setToogleFollowingInProgress(true);
+                    setFollow(el.id).then(data => {
+                      if (data.resultCode === 0) {
                         props.follow(el.id);
                       }
+                      props.setToogleFollowingInProgress(false);
                     });
                   }}
                   className={`${style.button} ${style.button_follow}`}
