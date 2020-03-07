@@ -3,35 +3,22 @@ import { connect } from "react-redux";
 import {
   follow,
   unfollow,
-  setUsers,
   setCurrentPage,
   setTotalCount,
-  setToogleIsFetching,
-  setToogleFollowingInProgress
+  getUsers
 } from "../../redux/usersReducer";
 import Users from "./users";
 import Preloader from "../../common/preloader/preloader";
-import { getUsers } from "../../API/API";
+import { compose } from "redux";
+import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.setToogleIsFetching(true);
-
-    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-      this.props.setToogleIsFetching(false);
-      this.props.setUsers(data.items);
-      this.props.setTotalCount(data.totalCount);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = page => {
-    this.props.setToogleIsFetching(true);
-    this.props.setCurrentPage(page);
-
-    getUsers(page, this.props.pageSize).then(data => {
-      this.props.setToogleIsFetching(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsers(page, this.props.pageSize);
   };
 
   render() {
@@ -63,7 +50,9 @@ class UsersContainer extends React.Component {
             follow={this.props.follow}
             isFetching={this.props.isFetching}
             followingInProgress={this.props.followingInProgress}
-            setToogleFollowingInProgress={this.props.setToogleFollowingInProgress}
+            setToogleFollowingInProgress={
+              this.props.setToogleFollowingInProgress
+            }
           />
         )}
       </>
@@ -82,12 +71,21 @@ let mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalCount,
-  setToogleIsFetching,
-  setToogleFollowingInProgress
-})(UsersContainer);
+export default compose(
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setCurrentPage,
+    setTotalCount,
+    getUsers
+  }),
+  withAuthRedirect
+)(UsersContainer);
+
+// export default connect(mapStateToProps, {
+//   follow,
+//   unfollow,
+//   setCurrentPage,
+//   setTotalCount,
+//   getUsers
+// })(UsersContainer);

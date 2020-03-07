@@ -2,7 +2,6 @@ import React from "react";
 import style from "./users.module.css";
 import defaultPic from "./../../assets/img/defaultPic.png";
 import { NavLink } from "react-router-dom";
-import { setUnfollow, setFollow } from "../../API/API";
 
 const Users = props => {
   return (
@@ -38,15 +37,9 @@ const Users = props => {
             <div>
               {el.followed ? (
                 <button
-                  disabled={props.followingInProgress}
+                  disabled={props.followingInProgress.some(id => id === el.id)}
                   onClick={() => {
-                    props.setToogleFollowingInProgress(true);
-                    setUnfollow(el.id).then(data => {
-                      if (data.resultCode === 0) {
-                        props.unfollow(el.id);
-                      }
-                      props.setToogleFollowingInProgress(false);
-                    });
+                    props.unfollow(el.id);
                   }}
                   className={`${style.button} ${style.button_unfollow}`}
                 >
@@ -54,15 +47,9 @@ const Users = props => {
                 </button>
               ) : (
                 <button
-                  disabled={props.followingInProgress}
+                  disabled={props.followingInProgress.some(id => id === el.id)}
                   onClick={() => {
-                    props.setToogleFollowingInProgress(true);
-                    setFollow(el.id).then(data => {
-                      if (data.resultCode === 0) {
-                        props.follow(el.id);
-                      }
-                      props.setToogleFollowingInProgress(false);
-                    });
+                    props.follow(el.id);
                   }}
                   className={`${style.button} ${style.button_follow}`}
                 >

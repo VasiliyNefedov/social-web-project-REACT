@@ -7,6 +7,9 @@
     border: 2px solid rgb(55, 232, 255);
     border-radius: 20px;
 }
+.textarea:focus {
+    outline: none;
+}
 .profileBlogPost {
     margin: 0;
 }
@@ -29,4 +32,7 @@
 }
 .button:hover {
     background-color: rgb(55, 232, 255);
+}
+.button:focus {
+    outline: none;
 }

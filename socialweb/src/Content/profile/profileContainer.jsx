@@ -1,34 +1,60 @@
 import React from "react";
 import Profile from "./profile";
 import { connect } from "react-redux";
-import { setUserProfile } from "./../../redux/profileReducer";
+import {
+  setUserProfile,
+  getUserProfile,
+  getUserStatus,
+  updateUserStatus
+} from "./../../redux/profileReducer";
 import { withRouter } from "react-router-dom";
-import { getUserProfile } from "../../API/API";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
-    if (!userId) userId = 2;
-
-    getUserProfile(userId).then(response => {
-      this.props.setUserProfile(response.data);
-    });
+    if (!userId) userId = this.props.authorisedId;
+    this.props.getUserProfile(userId);
+    this.props.getUserStatus(userId);
   }
   render() {
     return (
       <div className="profile">
-        <Profile {...this.props} displayProfile={this.props.displayProfile} />
+        <Profile
+          {...this.props}
+          isFetching={this.props.isFetching}
+          status={this.props.status}
+          displayProfile={this.props.displayProfile}
+          updateUserStatus={this.props.updateUserStatus}
+        />
       </div>
     );
   }
 }
 
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
 let mapStateToProps = state => ({
-  displayProfile: state.profile.displayProfile
+  displayProfile: state.profile.displayProfile,
+  authorisedId: state.auth.id,
+  status: state.profile.status,
+  isFetching: state.profile.isFetching
 });
 
-let urlProfileContainer = withRouter(ProfileContainer);
+// let urlProfileContainer = withRouter(AuthRedirectComponent);
 
-export default connect(mapStateToProps, { setUserProfile })(
-  urlProfileContainer
-);
+// export default connect(mapStateToProps, { setUserProfile, getUserProfile })(
+//   urlProfileContainer
+// );
+
+export default compose(
+  connect(mapStateToProps, {
+    setUserProfile,
+    getUserProfile,
+    getUserStatus,
+    updateUserStatus
+  }),
+  withRouter
+  // withAuthRedirect
+)(ProfileContainer);

@@ -1,0 +1,43 @@
+.profileStatusContainer {
+    display: flex;
+    margin-bottom: 10px;
+    border: 2px solid rgb(55, 232, 255);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 30px;
+}
+.textarea {
+    margin: 0;
+    padding: 5px;
+    resize: none;
+    
+    border-style: none;
+    flex-grow: 1;
+}
+.textarea:focus {
+    outline: none;
+}
+
+.button {
+    border-style: none;
+    border-radius: 20px;
+    height: 30px;
+    width: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12pt;
+    background-color: rgb(129, 255, 177);
+    transition: all 0.5s ease-in-out;
+}
+.button:focus {
+    outline: none;
+}
+.button:hover {
+    background-color: rgb(55, 232, 255);
+}
+.preloader{
+    height: 30px;
+    width: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+}

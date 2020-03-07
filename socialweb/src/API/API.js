@@ -8,24 +8,38 @@ const instance = Axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
 
-export const getUsers = (currentPage = 1, pageSize = 10) => {
-  return instance
-    .get(`users?page=${currentPage}&count=${pageSize}`)
-    .then(response => response.data);
+export let userAPI = {
+  getUsers(currentPage = 1, pageSize = 10) {
+    return instance
+      .get(`users?page=${currentPage}&count=${pageSize}`)
+      .then(response => response.data);
+  },
+  setUnfollow(userId) {
+    return instance.delete(`follow/${userId}`).then(response => response.data);
+  },
+  setFollow(userId) {
+    return instance.post(`follow/${userId}`).then(response => response.data);
+  },
+  getUserProfile(userId) {
+    console.warn('obsolete method. please use profileAPI.getUserProfile')
+    return profileAPI.getUserProfile(userId);
+  }
 };
 
-export const setUnfollow = userId => {
-  return instance.delete(`follow/${userId}`).then(response => response.data);
-};
-
-export const setFollow = userId => {
-  return instance.post(`follow/${userId}`).then(response => response.data);
-};
-
-export const getUserProfile = userId => {
-  return instance.get(`profile/${userId}`);
-};
-
-export const getAuth = () => {
+export let authAPI = {
+  getAuth() {
     return instance.get(`auth/me`);
-}
+  }
+};
+
+export let profileAPI = {
+  getUserProfile(userId) {
+    return instance.get(`profile/${userId}`);
+  },
+  getUserStatus(userId) {
+    return instance.get(`profile/status/${userId}`);
+  },
+  updatetUserStatus(statusText) {
+    return instance.put(`profile/status/`, {status: statusText});
+  }
+};

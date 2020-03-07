@@ -3,6 +3,7 @@ import Dialogs from "./dialogs/dialogs";
 import { Route } from "react-router-dom";
 import UsersContainer from "./users/usersContainer";
 import ProfileContainer from "./profile/profileContainer";
+import Login from "./login/login";
 
 function Content(props) {
   return (
@@ -23,6 +24,12 @@ function Content(props) {
         path="/users"
         render={() => (
           <UsersContainer />
+        )}
+      />
+      <Route
+        path="/login"
+        render={() => (
+          <Login />
         )}
       />
     </div>
