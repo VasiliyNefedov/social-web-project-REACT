@@ -78,8 +78,8 @@ export default compose(
     setCurrentPage,
     setTotalCount,
     getUsers
-  }),
-  withAuthRedirect
+  })
+  // withAuthRedirect
 )(UsersContainer);
 
 // export default connect(mapStateToProps, {

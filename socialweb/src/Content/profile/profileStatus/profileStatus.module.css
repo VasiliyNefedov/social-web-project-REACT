@@ -6,11 +6,14 @@
     overflow: hidden;
     height: 30px;
 }
+.TextStatusContainer {
+    flex-grow: 1;
+
+}
 .textarea {
     margin: 0;
     padding: 5px;
     resize: none;
-    
     border-style: none;
     flex-grow: 1;
 }

@@ -1,39 +1,44 @@
 import React from "react";
 import style from "./dialogsChat.module.css";
 import { Redirect } from "react-router-dom";
+import { reduxForm, Field } from "redux-form";
 
-const DialogsChat = props => {
-  let dialogsChatMessagesArray = props.dialogsChatMessages.map(el => {
-    return <div className={style.message}>{el.message}</div>;
-  });
-
-  let newMessageText = React.createRef();
-
-  let addNewMessage = () => {
-    props.SetDialogsChatMessagesAC();
+class DialogsChat extends React.Component {
+  onSubmit = formData => {
+    return this.props.SetDialogsChatMessagesAC(formData.messageText);
   };
+  render() {
+    if (!this.props.isAuth) return <Redirect to="/login" />;
 
-  let onMessageChange = () => {
-    props.UpdateCurrentMessageTextAC(newMessageText.current.value);
-  };
+    let dialogsChatMessagesArray = this.props.dialogsChatMessages.map(el => {
+      return <div className={style.message}>{el.message}</div>;
+    });
 
-  if (!props.isAuth) return <Redirect to="/login" />;
+    return (
+      <div>
+        <div className={style.dialogsChat} >{dialogsChatMessagesArray}</div>
+        <DialogsChatReduxForm onSubmit={this.onSubmit} />
+      </div>
+    );
+  }
+}
 
+const DialogsChatForm = props => {
   return (
-    <div>
-      <div className={style.dialogsChat}>{dialogsChatMessagesArray}</div>
-      <textarea
-        value={props.currentMessageText}
-        onChange={onMessageChange}
-        ref={newMessageText}
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        name={"messageText"}
+        component={"textarea"}
         placeholder="Write your message..."
         className={style.textarea}
-      ></textarea>
-      <button onClick={addNewMessage} className={style.button}>
-        Send message
-      </button>
-    </div>
+      />
+      <button className={style.button}>Send message</button>
+    </form>
   );
 };
+
+const DialogsChatReduxForm = reduxForm({
+  form: "dialogsMessage"
+})(DialogsChatForm);
 
 export default DialogsChat;

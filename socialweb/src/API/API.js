@@ -29,6 +29,12 @@ export let userAPI = {
 export let authAPI = {
   getAuth() {
     return instance.get(`auth/me`);
+  },
+  setLogin(loginData) {
+    return instance.post(`/auth/login`, loginData);
+  },
+  setLogout() {
+    return instance.delete(`auth/login`);
   }
 };
 

@@ -21,21 +21,16 @@ let initialState = {
 const dialogsReducer = (stateReducer = initialState, action) => {
   switch (action.type) {
     case SET_DIALOGS_CHAT_MESSAGES: {
+      if (!action.text) return stateReducer;
       let newMessage = {
         id: 4,
-        message: stateReducer.currentMessageText
+        message: action.text
       };
       let stateCopy = {
         ...stateReducer,
         dialogsChatMessages: [...stateReducer.dialogsChatMessages]
       };
-
-      if (stateReducer.currentMessageText !== "") {
-        stateCopy.dialogsChatMessages.push(newMessage);
-      } else {
-        return stateReducer;
-      }
-      stateCopy.currentMessageText = "";
+      stateCopy.dialogsChatMessages.push(newMessage);
       return stateCopy;
     }
     case UPDATE_CURRENT_MESSAGE_TEXT: {
@@ -48,13 +43,11 @@ const dialogsReducer = (stateReducer = initialState, action) => {
   }
 };
 
-export const SetDialogsChatMessagesAC = () => ({
-  type: SET_DIALOGS_CHAT_MESSAGES
-});
+//ACTION CREATORs:
 
-export const UpdateCurrentMessageTextAC = text => ({
-  type: UPDATE_CURRENT_MESSAGE_TEXT,
-  currentText: text
+export const SetDialogsChatMessagesAC = text => ({
+  type: SET_DIALOGS_CHAT_MESSAGES,
+  text: text
 });
 
 export default dialogsReducer;
