@@ -2,18 +2,6 @@ import React from "react";
 import style from "./profileStatus.module.css";
 import { Field, reduxForm } from "redux-form";
 
-// const renderField = ({
-//   input,
-//   placeholder,
-//   type,
-//   meta: { touched, error, warning }
-// }) => (
-//   <div className={style.TextStatusContainer}>
-//     {touched && error && <span>{error}</span>}
-//     <input type={type} {...input} placeholder={placeholder} className={style.textarea} />
-//   </div>
-// );
-
 const StatusForm = props => {
   return (
     <form
@@ -22,6 +10,7 @@ const StatusForm = props => {
       onBlur={props.onBlur}
     >
       <Field
+        autoFocus={true}
         component={'input'}
         type="text"
         name="statusText"
