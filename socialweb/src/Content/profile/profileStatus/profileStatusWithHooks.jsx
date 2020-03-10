@@ -6,29 +6,42 @@ import { useState } from "react";
 
 const ProfileStatusWithHooks = props => {
   let [editMode, setEditMode] = useState(false);
-  let [status, setStatus] = useState(props.status)
+  let [status, setStatus] = useState(props.status);
+  let [isFetching, setIsFetching] = useState(false);
   const activateEditMode = () => {
     setEditMode(true);
   };
   const deactivateEditMode = () => {
     setEditMode(false);
   };
+  const deactivateEditModeOnBlur = () => {
+    !isFetching && setEditMode(false)
+  }
   return (
     <div className="profileStatus">
       {editMode ? (
         <StatusReduxForm
-          onSubmit={formData => props.updateUserStatus(formData.statusText)}
-          // onBlur={deactivateEditMode}
+          onSubmit={formData => {
+            setIsFetching(true);
+            return props
+              .updateUserStatus(formData.statusText)
+              .then(() => {setIsFetching(false); deactivateEditMode()});
+          }}
+          // onBlur={(deactivateEditMode) => void 0}
           status={props.status}
+          isFetching={isFetching}
+          // format={null}
+          deactivateEditMode={deactivateEditMode}
         />
       ) : (
         <div className={style.profileStatusContainer}>
-          <textarea
+          <div
             onClick={activateEditMode}
-            value={status}
             className={style.textarea}
-            placeholder="Write your status here..."
-          ></textarea>
+            // placeholder="Write your status here..."
+          >
+            {props.status ? props.status : "Write your status here..."}
+          </div>
         </div>
       )}
     </div>

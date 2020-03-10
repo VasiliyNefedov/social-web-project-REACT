@@ -87,7 +87,7 @@ export const getUserStatus = userId => {
 export const updateUserStatus = statusText => {
   return dispatch => {
     dispatch(setToogleIsFetching(true));
-    profileAPI.updatetUserStatus(statusText).then(response => {
+    return profileAPI.updatetUserStatus(statusText).then(response => {
       dispatch(setToogleIsFetching(false));
       if (response.data.resultCode === 0) {
         dispatch(setUserStatus(statusText));
