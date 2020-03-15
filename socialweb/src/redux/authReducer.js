@@ -54,51 +54,44 @@ const setToggleIsfetcing = toggle => ({
 
 // THUNK CREATORs:
 
-export const getAuth = () => {
-  return dispatch => {
-    return authAPI.getAuth().then(response => {
+export const getAuth = () => async dispatch => {
+  let response = await authAPI.getAuth();
+  if (response.data.resultCode === 0) {
+    dispatch(SetAuthUserData(response.data.data));
+  }
+};
+
+export const setLogin = (email, password, rememberMe) => async dispatch => {
+  dispatch(setToggleIsfetcing(true));
+  let response = await authAPI.setLogin({
+    email: email,
+    password: password,
+    rememberMe: rememberMe
+  });
+  if (response.data.resultCode === 0) {
+    authAPI.getAuth().then(response => {
       if (response.data.resultCode === 0) {
         dispatch(SetAuthUserData(response.data.data));
       }
     });
-  };
+  } else if (response.data.resultCode === 1) {
+    let message =
+      response.data.messages.length > 0
+        ? response.data.messages[0]
+        : "some error";
+    let action = stopSubmit("login", { _error: message });
+    dispatch(action);
+  }
+  dispatch(setToggleIsfetcing(false));
 };
 
-export const setLogin = (email, password, rememberMe) => {
-  return dispatch => {
-    dispatch(setToggleIsfetcing(true));
-    authAPI
-      .setLogin({ email: email, password: password, rememberMe: rememberMe })
-      .then(response => {
-        if (response.data.resultCode === 0) {
-          authAPI.getAuth().then(response => {
-            if (response.data.resultCode === 0) {
-              dispatch(SetAuthUserData(response.data.data));
-            }
-          });
-        } else if (response.data.resultCode === 1) {
-          let message =
-            response.data.messages.length > 0
-              ? response.data.messages[0]
-              : "some error";
-          let action = stopSubmit("login", { _error: message });
-          dispatch(action);
-        }
-        dispatch(setToggleIsfetcing(false));
-      });
-  };
-};
-
-export const setLogout = () => {
-  return dispatch => {
-    dispatch(setToggleIsfetcing(true));
-    authAPI.setLogout().then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setLogoutAC());
-        dispatch(setToggleIsfetcing(false));
-      }
-    });
-  };
+export const setLogout = () => async dispatch => {
+  dispatch(setToggleIsfetcing(true));
+  let response = await authAPI.setLogout();
+  if (response.data.resultCode === 0) {
+    dispatch(setLogoutAC());
+    dispatch(setToggleIsfetcing(false));
+  }
 };
 
 export default authReducer;

@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileInfo from "./profileInfo/profileInfo";
 import ProfileBlogContainer from "./profileBlog/profileBlogContainer";
-import ProfileStatus from "./profileStatus/profileStatus";
+// import ProfileStatus from "./profileStatus/profileStatus";
 import ProfileStatusWithHooks from './profileStatus/profileStatusWithHooks';
 
 const Profile = props => {

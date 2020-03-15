@@ -44,3 +44,9 @@
     margin: 0;
     padding: 0;
 }
+.errorMessage {
+    color: red;
+    position: absolute ;
+    margin: 5px 15px;
+    pointer-events: none;
+}

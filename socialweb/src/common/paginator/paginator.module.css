@@ -1,0 +1,28 @@
+.selectedPage {
+  font-size: larger;
+  font-weight: bolder;
+  margin: 0 5px;
+}
+.pages {
+  font-size: 14pt;
+  /* display: flex; */
+  text-align: center;
+  margin: 0 10px;
+}
+.number {
+  cursor: pointer;
+  margin: 0 3px;
+}
+.button {
+  border: 2px solid rgb(55, 232, 255);
+  border-radius: 20px;
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
+  font-size: 12pt;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: rgb(55, 232, 255);
+}

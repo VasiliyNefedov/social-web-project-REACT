@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./profileStatus.module.css";
-import PreloaderMini from "../../../common/preloader/preloaderMini";
+// import PreloaderMini from "../../../common/preloader/preloaderMini";
 import { StatusReduxForm } from "./statusForm";
 
 class ProfileStatus extends React.Component {

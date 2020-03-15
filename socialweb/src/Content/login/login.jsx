@@ -45,7 +45,7 @@ const renderField = ({
   meta: { touched, error, warning }
 }) => (
   <div>
-    {touched && error && <span>{error}</span>}
+    {touched && error && <div className={style.errorMessage}>{error}</div>}
     <input
       type={type}
       {...input}
@@ -55,22 +55,22 @@ const renderField = ({
   </div>
 );
 
-const LoginForm = props => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
+        <span>Email:</span>
         <Field
           type="text"
-          placeholder="email"
           name={"email"}
           validate={[requiredField, maxLengthEmail]}
           component={renderField}
         />
       </div>
       <div>
+        <span>Password:</span>
         <Field
           type="password"
-          placeholder={"Password"}
           name={"password"}
           validate={[requiredField, maxLengthPassword, minLengthPassword]}
           component={renderField}
@@ -79,13 +79,13 @@ const LoginForm = props => {
       <div className={style.checkboxAndButton}>
         <Field type={"checkbox"} component={"input"} name={"rememberMe"} />{" "}
         remember me <button>Login</button>
-  {props.error && <div>{props.error}</div>}
+        {error && <div>{error}</div>}
       </div>
     </form>
   );
 };
 
-const LoginReduxForm = reduxForm({  
+const LoginReduxForm = reduxForm({
   form: "login"
 })(LoginForm);
 
@@ -93,8 +93,6 @@ const mapStateToProps = state => ({
   isAuth: state.auth.isAuth,
   isFetching: state.auth.isFetching
 });
-
-// export default Login;
 
 export default compose(
   connect(mapStateToProps, { setLogin }),

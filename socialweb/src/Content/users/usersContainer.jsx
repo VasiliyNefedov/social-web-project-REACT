@@ -10,15 +10,16 @@ import {
 import Users from "./users";
 import Preloader from "../../common/preloader/preloader";
 import { compose } from "redux";
-import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
+// import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
 import {
-  getUserListSelector,
+  getUserList,
   getPageSize,
   getTotalCount,
   getCurrentPage,
   getIsFetching,
   getFollowingInProgress
 } from "./../../redux/usersSelectors";
+import Paginator from "../../common/paginator/paginator";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -30,38 +31,35 @@ class UsersContainer extends React.Component {
   };
 
   render() {
-    let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
-
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
-
-    if (
-      this.props.currentPage < 4 ||
-      this.props.currentPage > pages.length - 4
-    ) {
-      pages.splice(3, pages.length - 6, "...");
-    }
-
     return (
       <>
         {this.props.isFetching ? (
           <Preloader />
         ) : (
-          <Users
-            pages={pages}
-            onPageChanged={this.onPageChanged}
-            currentPage={this.props.currentPage}
-            userList={this.props.userList}
-            unfollow={this.props.unfollow}
-            follow={this.props.follow}
-            isFetching={this.props.isFetching}
-            followingInProgress={this.props.followingInProgress}
-            setToogleFollowingInProgress={
-              this.props.setToogleFollowingInProgress
-            }
-          />
+          <>
+            <Paginator
+              onPageChanged={this.onPageChanged}
+              currentPage={this.props.currentPage}
+              totalCount={this.props.totalCount}
+              pageSize={this.props.pageSize}
+            />
+            <Users
+              userList={this.props.userList}
+              unfollow={this.props.unfollow}
+              follow={this.props.follow}
+              isFetching={this.props.isFetching}
+              followingInProgress={this.props.followingInProgress}
+              setToogleFollowingInProgress={
+                this.props.setToogleFollowingInProgress
+              }
+            />
+            <Paginator
+              onPageChanged={this.onPageChanged}
+              currentPage={this.props.currentPage}
+              totalCount={this.props.totalCount}
+              pageSize={this.props.pageSize}
+            />
+          </>
         )}
       </>
     );
@@ -70,7 +68,7 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    userList: getUserListSelector(state),
+    userList: getUserList(state),
     pageSize: getPageSize(state),
     totalCount: getTotalCount(state),
     currentPage: getCurrentPage(state),

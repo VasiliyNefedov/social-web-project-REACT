@@ -1,5 +1,5 @@
-import { authAPI } from "../API/API";
-import { stopSubmit } from "redux-form";
+// import { authAPI } from "../API/API";
+// import { stopSubmit } from "redux-form";
 import { getAuth } from "./authReducer";
 
 const SET_INITIALIZED = "SET_INITIALIZED";

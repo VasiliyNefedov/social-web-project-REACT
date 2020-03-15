@@ -68,34 +68,25 @@ export const setToogleIsFetching = isFetching => ({
 
 // THUNK CREATORs:
 
-export const getUserProfile = userId => {
-  return dispatch => {
-    userAPI.getUserProfile(userId).then(response => {
-      dispatch(setUserProfile(response.data));
-    });
-  };
+export const getUserProfile = userId => async dispatch => {
+  let response = await userAPI.getUserProfile(userId);
+  dispatch(setUserProfile(response.data));
 };
 
-export const getUserStatus = userId => {
-  return dispatch => {
-    profileAPI.getUserStatus(userId).then(response => {
-      dispatch(setUserStatus(response.data));
-    });
-  };
+export const getUserStatus = userId => async dispatch => {
+  let response = await profileAPI.getUserStatus(userId);
+  dispatch(setUserStatus(response.data));
 };
 
-export const updateUserStatus = statusText => {
-  return dispatch => {
-    dispatch(setToogleIsFetching(true));
-    return profileAPI.updatetUserStatus(statusText).then(response => {
-      dispatch(setToogleIsFetching(false));
-      if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(statusText));
-      } else if (response.data.resultCode === 1) {
-        dispatch(setUserStatus(""));
-      }
-    });
-  };
+export const updateUserStatus = statusText => async dispatch => {
+  dispatch(setToogleIsFetching(true));
+  let response = await profileAPI.updatetUserStatus(statusText);
+  dispatch(setToogleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    dispatch(setUserStatus(statusText));
+  } else if (response.data.resultCode === 1) {
+    dispatch(setUserStatus(""));
+  }
 };
 
 export default profileReducer;

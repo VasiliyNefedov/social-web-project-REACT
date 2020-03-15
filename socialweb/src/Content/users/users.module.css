@@ -60,11 +60,3 @@
 .button:hover {
   background-color: rgb(55, 232, 255);
 }
-.selectedPage {
-  font-size: larger;
-  font-weight: bolder;
-}
-.pages {
-  text-align: center;
-  margin: 0 auto;
-}

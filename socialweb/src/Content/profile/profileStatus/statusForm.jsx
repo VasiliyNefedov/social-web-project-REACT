@@ -4,11 +4,11 @@ import { Field, reduxForm } from "redux-form";
 import PreloaderMini from "../../../common/preloader/preloaderMini";
 
 const StatusForm = props => {
-  const deactivateEditMode = props.deactivateEditMode
   return (
     <form
       onSubmit={props.handleSubmit}
       className={style.profileStatusContainer}
+      // onBlur={props.deactivateEditModeOnBlur}
     >
       <Field
         autoFocus={true}
@@ -18,7 +18,7 @@ const StatusForm = props => {
         className={style.textarea}
         placeholder="Write your status here..."
         // defaultFormat={() => props.status}
-        onBlur={() => props.deactivateEditMode}
+        // onBlur={() => props.deactivateEditModeOnBlur()}
       />
       {props.isFetching ? (
         <PreloaderMini />

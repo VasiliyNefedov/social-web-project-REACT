@@ -8,7 +8,8 @@ class ProfileBlog extends React.Component {
     return this.props.SetProfileBlogItemsAC(formData.postText);
   };
   render() {
-    let profileBlogItemsArray = this.props.profileBlogItems
+    console.log('render profileBlog')
+    let profileBlogItemsArray = [...this.props.profileBlogItems]
       .map(el => {
         return (
           <div className={style.profileBlogPost}>
