@@ -5,8 +5,8 @@
     "main.css": "/social-web-project/static/css/main.19eb082a.chunk.css",
     "main.js": "/social-web-project/static/js/main.4c1f5699.chunk.js",
     "main.js.map": "/social-web-project/static/js/main.4c1f5699.chunk.js.map",
-    "runtime-main.js": "/social-web-project/static/js/runtime-main.b0d77b0d.js",
-    "runtime-main.js.map": "/social-web-project/static/js/runtime-main.b0d77b0d.js.map",
+    "runtime-main.js": "/social-web-project/static/js/runtime-main.1342703d.js",
+    "runtime-main.js.map": "/social-web-project/static/js/runtime-main.1342703d.js.map",
     "static/js/3.c04eff6a.chunk.js": "/social-web-project/static/js/3.c04eff6a.chunk.js",
     "static/js/3.c04eff6a.chunk.js.map": "/social-web-project/static/js/3.c04eff6a.chunk.js.map",
     "static/css/4.929d2282.chunk.css": "/social-web-project/static/css/4.929d2282.chunk.css",
@@ -19,10 +19,10 @@
     "static/js/6.77df7902.chunk.js": "/social-web-project/static/js/6.77df7902.chunk.js",
     "static/js/6.77df7902.chunk.js.map": "/social-web-project/static/js/6.77df7902.chunk.js.map",
     "static/css/7.c33863dc.chunk.css": "/social-web-project/static/css/7.c33863dc.chunk.css",
-    "static/js/7.568d0fdf.chunk.js": "/social-web-project/static/js/7.568d0fdf.chunk.js",
-    "static/js/7.568d0fdf.chunk.js.map": "/social-web-project/static/js/7.568d0fdf.chunk.js.map",
+    "static/js/7.d68091cc.chunk.js": "/social-web-project/static/js/7.d68091cc.chunk.js",
+    "static/js/7.d68091cc.chunk.js.map": "/social-web-project/static/js/7.d68091cc.chunk.js.map",
     "index.html": "/social-web-project/index.html",
-    "precache-manifest.7f88e3b44059a615514c3056d4c0f85c.js": "/social-web-project/precache-manifest.7f88e3b44059a615514c3056d4c0f85c.js",
+    "precache-manifest.d1393361a3e2739d7c674c02815366d7.js": "/social-web-project/precache-manifest.d1393361a3e2739d7c674c02815366d7.js",
     "service-worker.js": "/social-web-project/service-worker.js",
     "static/css/4.929d2282.chunk.css.map": "/social-web-project/static/css/4.929d2282.chunk.css.map",
     "static/css/5.ccc177f3.chunk.css.map": "/social-web-project/static/css/5.ccc177f3.chunk.css.map",
@@ -35,7 +35,7 @@
     "static/media/loaderMini.svg": "/social-web-project/static/media/loaderMini.8584a5ff.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b0d77b0d.js",
+    "static/js/runtime-main.1342703d.js",
     "static/js/3.c04eff6a.chunk.js",
     "static/css/main.19eb082a.chunk.css",
     "static/js/main.4c1f5699.chunk.js"
