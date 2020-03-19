@@ -21,7 +21,7 @@ export let userAPI = {
     return instance.post(`follow/${userId}`).then(response => response.data);
   },
   getUserProfile(userId) {
-    console.warn('obsolete method. please use profileAPI.getUserProfile')
+    console.warn("obsolete method. please use profileAPI.getUserProfile");
     return profileAPI.getUserProfile(userId);
   }
 };
@@ -46,6 +46,18 @@ export let profileAPI = {
     return instance.get(`profile/status/${userId}`);
   },
   updatetUserStatus(statusText) {
-    return instance.put(`profile/status/`, {status: statusText});
+    return instance.put(`profile/status/`, { status: statusText });
+  },
+  setUserPhoto(photoFile) {
+    const formData = new FormData();
+    formData.append("image", photoFile);
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+  },
+  updateProfileInfo(info) {
+    return instance.put(`profile/`, info);
   }
 };

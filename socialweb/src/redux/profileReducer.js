@@ -1,9 +1,13 @@
 import { userAPI, profileAPI } from "./../API/API";
+import { stopSubmit } from "redux-form";
 
 const SET_PROFILE_BLOG_ITEMS = "SET-PROFILE-BLOG-ITEMS";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
 const TOOGLE_IS_FETCHING = "TOOGLE_IS_FETCHING";
+const SET_USER_PHOTO = "SET_USER_PHOTO";
+const SET_PROFILE_INFO = "SET_PROFILE_INFO";
+const PROFILE_EDIT_TOGGLE = "PROFILE_EDIT_TOGGLE";
 
 let initialState = {
   profileBlogItems: [
@@ -13,7 +17,25 @@ let initialState = {
   currentPostText: "",
   displayProfile: null,
   status: "",
-  isFetching: false
+  isFetching: false,
+  photos: { large: null, small: null },
+  info: {
+    aboutMe: null,
+    contacts: {
+      facebook: null,
+      github: null,
+      instagram: null,
+      mainLink: null,
+      twitter: null,
+      vk: null,
+      website: null,
+      youtube: null
+    },
+    lookingForAJob: false,
+    lookingForAJobDescription: null,
+    fullName: null
+  },
+  isProfileEdit: false
 };
 
 const profileReducer = (stateReducer = initialState, action) => {
@@ -41,6 +63,24 @@ const profileReducer = (stateReducer = initialState, action) => {
     case TOOGLE_IS_FETCHING: {
       return { ...stateReducer, isFetching: action.isFetching };
     }
+    case SET_USER_PHOTO: {
+      return {
+        ...stateReducer,
+        photos: action.photos
+      };
+    }
+    case SET_PROFILE_INFO: {
+      return {
+        ...stateReducer,
+        info: action.info
+      };
+    }
+    case PROFILE_EDIT_TOGGLE: {
+      return {
+        ...stateReducer,
+        isProfileEdit: action.isProfileEdit
+      }
+    }
     default:
       return stateReducer;
   }
@@ -52,7 +92,6 @@ export const SetProfileBlogItemsAC = text => ({
   type: SET_PROFILE_BLOG_ITEMS,
   text: text
 });
-
 export const setUserProfile = profile => ({
   type: SET_USER_PROFILE,
   profile: profile
@@ -65,6 +104,18 @@ export const setToogleIsFetching = isFetching => ({
   type: TOOGLE_IS_FETCHING,
   isFetching: isFetching
 });
+export const setUserPhoto = photos => ({
+  type: SET_USER_PHOTO,
+  photos: photos
+});
+export const setProfileInfo = info => ({
+  type: SET_PROFILE_INFO,
+  info: info
+});
+export const setProfileEditMode = isEdit => ({
+  type: PROFILE_EDIT_TOGGLE,
+  isProfileEdit: isEdit
+})
 
 // THUNK CREATORs:
 
@@ -86,6 +137,32 @@ export const updateUserStatus = statusText => async dispatch => {
     dispatch(setUserStatus(statusText));
   } else if (response.data.resultCode === 1) {
     dispatch(setUserStatus(""));
+  }
+};
+
+export const savePhoto = file => async (dispatch, getState) => {
+  const id = getState().auth.id;
+  let response = await profileAPI.setUserPhoto(file);
+  if (response.data.resultCode === 0) {
+    dispatch(setUserPhoto(response.data.photos));
+    dispatch(getUserProfile(id));
+  }
+};
+
+export const saveProfileInfo = info => async (dispatch, getState) => {
+  const id = getState().auth.id;
+  const response = await profileAPI.updateProfileInfo(info);
+  if (response.data.resultCode === 0) {
+    dispatch(setProfileInfo(response.data));
+    dispatch(getUserProfile(id));
+    dispatch(setProfileEditMode(false))
+  } else if (response.data.resultCode === 1) {
+    let message =
+      response.data.messages.length > 0
+        ? response.data.messages[0]
+        : "some error";
+    let action = stopSubmit("profileEdit", { _error: message });
+    dispatch(action);
   }
 };
 

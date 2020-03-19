@@ -23,7 +23,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className={style.login}>
-        <h1>Login</h1>nefedov.vasiliy@gmail.com<br></br>a7yVZ2esNFQaRta
+        <h1>Login</h1>
         {!this.props.isFetching ? (
           <LoginReduxForm onSubmit={this.onSubmit} />
         ) : (

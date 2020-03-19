@@ -25,6 +25,7 @@ const ProfileStatusWithHooks = props => {
     <div className="profileStatus">
       {editMode ? (
         <StatusReduxForm
+          initialValues={{ statusText: props.status }}
           onSubmit={formData => {
             setIsFetching(true);
             return props.updateUserStatus(formData.statusText).then(() => {
