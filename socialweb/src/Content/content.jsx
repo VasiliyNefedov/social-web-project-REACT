@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Preloader from "../common/preloader/preloader";
 const Dialogs = React.lazy(() => import("./dialogs/dialogs"));
 const UsersContainer = React.lazy(() => import("./users/usersContainer"));
@@ -10,10 +10,13 @@ function Content(props) {
   return (
     <div className="content">
       <Suspense fallback={<Preloader />}>
-        <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-        <Route path="/dialogs" render={() => <Dialogs />} />
-        <Route path="/users" render={() => <UsersContainer />} />
-        <Route path="/login" render={() => <Login />} />
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to={'/profile/'} />} />
+          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+          <Route path="/dialogs" render={() => <Dialogs />} />
+          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/login" render={() => <Login />} />
+        </Switch>
       </Suspense>
     </div>
   );
